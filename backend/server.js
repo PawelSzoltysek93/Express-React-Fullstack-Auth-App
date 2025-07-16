@@ -64,6 +64,13 @@ app.post("/register", upload.single("avatar"), (req, res) => {
   res.json({ message: "User registered succesfuly" });
 });
 
+app.post("/login", (req, res) => {
+  const { email, password } = req.body;
+  const users = readUsers();
+  const user = users.find((u) => u.email === email && u.password === password);
+  if (!user) return res.status(401).json({ message: "Invalid credentials" });
+  res.json({ message: "Login succesfully" });
+});
 app.listen(PORT, () => {
   console.log(`Server running on ${PORT}`);
 });
