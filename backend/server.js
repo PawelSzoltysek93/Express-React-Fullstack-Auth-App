@@ -44,14 +44,13 @@ app.post("/register", upload.single("avatar"), (req, res) => {
   const { name, email, password, job, dob } = req.body;
   const avatarPath = req.file ? `/uploads/avatar/${req.file.filename}` : "";
   const users = readUsers();
+
   if (users.find((user) => user.email === email)) {
-    if (req.file) {
-      fs.unlinkSync(req.file.path);
-    }
+    if (req.file) fs.unlinkSync(req.file.path);
     return res.status(400).json({ message: "Email already exists" });
   }
 
-  users.push({
+  const newUser = {
     id: Date.now(),
     name,
     email,
@@ -59,9 +58,12 @@ app.post("/register", upload.single("avatar"), (req, res) => {
     job,
     dob,
     avatar: avatarPath,
-  });
+  };
+
+  users.push(newUser);
   writeUsers(users);
-  res.json({ message: "User registered succesfuly" });
+
+  res.json(newUser);
 });
 
 app.post("/login", (req, res) => {
@@ -69,7 +71,8 @@ app.post("/login", (req, res) => {
   const users = readUsers();
   const user = users.find((u) => u.email === email && u.password === password);
   if (!user) return res.status(401).json({ message: "Invalid credentials" });
-  res.json({ message: "Login succesfully" });
+
+  res.json(user);
 });
 app.listen(PORT, () => {
   console.log(`Server running on ${PORT}`);
