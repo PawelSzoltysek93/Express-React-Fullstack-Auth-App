@@ -1,0 +1,55 @@
+# React Auth App
+
+This is a simple full-stack authentication application built with **React** (frontend) and **Express** (backend).
+
+Users can register with basic information and an avatar image. After registration, they can log in and see their profile with the uploaded avatar.
+
+---
+
+## 🚀 Features
+
+- User registration with avatar upload
+- User login
+- Protected `/home` route that displays user data
+- Session persists with `localStorage`
+- Express server with file upload (`multer`)
+
+---
+
+## 📂 Project structure
+
+- **Frontend:** React (Vite or CRA)  
+- **Backend:** Node.js with Express and `multer`  
+- User data is stored in a local JSON file (`users.json`)  
+- Uploaded avatars are saved in the `/uploads/avatar` folder.
+
+---
+
+## ⚙️ How to run
+
+### 1️⃣ Clone the repo
+
+```bash
+git clone https://github.com/PawelSzoltysek93/express-react-fullstack.git
+cd your-repo-name
+
+### 2️⃣ Install dependencies
+For backend:
+
+cd backend
+npm install
+
+For frontend:
+
+cd frontend
+npm install
+
+### 3️⃣ Run backend server
+
+cd backend
+node server.js
+The backend runs by default on http://localhost:5000.
+
+### 4️⃣ Run frontend
+
+npm run dev
